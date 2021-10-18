@@ -1,10 +1,8 @@
 package com.example.todo_app.fragments.list
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.todo_app.R
 import com.example.todo_app.databinding.FragmentListBinding
@@ -12,19 +10,32 @@ import com.example.todo_app.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
 
-    private lateinit var _mBinding : FragmentListBinding
+    private lateinit var mBinding : FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _mBinding = FragmentListBinding.inflate(inflater,container,false)
+        mBinding = FragmentListBinding.inflate(inflater,container,false)
 
-        _mBinding.floatingActionBtn.setOnClickListener {
+        mBinding.floatingActionBtn.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
-        return _mBinding.root
+
+        mBinding.fragmentList.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+        }
+
+        //set Menu
+        setHasOptionsMenu(true)
+
+        return mBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_fragment_menu,menu)
+
     }
 
 
