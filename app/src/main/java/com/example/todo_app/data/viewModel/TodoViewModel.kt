@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.todo_app.data.TodoDatabase
 import com.example.todo_app.data.models.TodoData
 import com.example.todo_app.data.repository.TodoRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -24,6 +25,25 @@ class TodoViewModel(application: Application) : AndroidViewModel(application){
     fun insertData(todoData: TodoData){
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(todoData)
+        }
+    }
+
+    fun updateData(todoData: TodoData){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateItem(todoData)
+        }
+
+    }
+
+    fun deleteItem(todoData: TodoData){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(todoData)
+        }
+    }
+
+    fun deleteAll(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
         }
     }
 

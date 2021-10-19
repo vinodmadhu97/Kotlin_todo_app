@@ -1,7 +1,9 @@
 package com.example.todo_app.fragments.list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -41,9 +43,20 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
 
         viewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
-            listAdapter.setData(data)
+            if (data.isNotEmpty()){
+                mBinding.rvTodo.visibility =View.VISIBLE
+                mBinding.noDataView.visibility = View.GONE
+                listAdapter.setData(data)
+            }else{
+                mBinding.rvTodo.visibility =View.GONE
+                mBinding.noDataView.visibility = View.VISIBLE
+            }
+
 
         })
+
+
+
 
 
         return mBinding.root
@@ -51,6 +64,27 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_fragment_menu,menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_delete_all -> confirmDeleteAllItems()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun confirmDeleteAllItems() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setPositiveButton("Yes"){_,_ ->
+            viewModel.deleteAll()
+            Toast.makeText(requireActivity(),"All todos deleted",Toast.LENGTH_SHORT).show()
+        }
+        alertDialogBuilder.setNegativeButton("No"){dialog,_ -> dialog.dismiss()}
+        alertDialogBuilder.setTitle("Delete All")
+        alertDialogBuilder.setMessage("Do you want to Delete All Items ? ")
+        alertDialogBuilder.create().show()
+
 
     }
 

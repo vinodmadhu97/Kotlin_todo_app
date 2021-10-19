@@ -20,6 +20,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val tvDescription = binding.descriptionTxt
         val cvPriorityIndicator = binding.priorityIndicator
         val listItemView = binding.rowBackground
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
