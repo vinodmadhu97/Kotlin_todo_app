@@ -1,9 +1,10 @@
 package com.example.todo_app.fragments.list
 
 import android.view.LayoutInflater
-import android.view.View
+
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_app.R
 import com.example.todo_app.data.models.Priority
@@ -18,6 +19,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val tvTitle = binding.titleTxt
         val tvDescription = binding.descriptionTxt
         val cvPriorityIndicator = binding.priorityIndicator
+        val listItemView = binding.rowBackground
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -29,6 +31,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.tvTitle.text = dataList[position].title
         holder.tvDescription.text = dataList[position].description
         val priority = dataList[position].priority
+
+        holder.listItemView.setOnClickListener {
+
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
+            holder.itemView.findNavController().navigate(action)
+        }
+
+
+
         when (priority) {
             Priority.HIGH -> holder.cvPriorityIndicator.setCardBackgroundColor(
                 ContextCompat.getColor(

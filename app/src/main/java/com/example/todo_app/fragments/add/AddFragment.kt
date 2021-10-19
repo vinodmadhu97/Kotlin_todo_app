@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.todo_app.R
 import com.example.todo_app.data.models.Priority
 import com.example.todo_app.data.models.TodoData
@@ -61,6 +62,7 @@ class AddFragment : Fragment() {
 
             todoViewModel.insertData(todoData)
             Toast.makeText(requireActivity(),"Insert successful",Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_addFragment_to_listFragment)
 
         }else{
             Toast.makeText(requireActivity(),"please fill out the all form files",Toast.LENGTH_SHORT).show()
