@@ -1,4 +1,4 @@
-package com.example.todo_app.fragments.list
+package com.example.todo_app.fragments.list.adapter
 
 import android.view.LayoutInflater
 
@@ -10,6 +10,7 @@ import com.example.todo_app.R
 import com.example.todo_app.data.models.Priority
 import com.example.todo_app.data.models.TodoData
 import com.example.todo_app.databinding.RowLayoutBinding
+import com.example.todo_app.fragments.list.ListFragmentDirections
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
