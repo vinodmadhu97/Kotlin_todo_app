@@ -26,5 +26,8 @@ class TodoRepository(private val todoDAO: TodoDAO) {
 
     fun searchedData(searchKey:String) : LiveData<List<TodoData>> = todoDAO.searchData(searchKey)
 
+    val sortByHighPriority : LiveData<List<TodoData>> = todoDAO.sortByHighPriority()
+    val sortByLowPriority : LiveData<List<TodoData>> = todoDAO.sortByLowPriority()
+
 
 }

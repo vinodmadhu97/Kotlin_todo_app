@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.todo_app.R
 import com.example.todo_app.data.models.TodoData
 import com.example.todo_app.data.viewModel.TodoViewModel
@@ -47,7 +48,7 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
         //set recycler view
         val recyclerView = mBinding.rvTodo
         recyclerView.adapter = listAdapter
-        recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
 
         recyclerView.itemAnimator = LandingAnimator().apply {
             addDuration = 300
@@ -111,6 +112,12 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_delete_all -> confirmDeleteAllItems()
+            R.id.menu_priority_high -> viewModel.sortByHighPriority.observe(this, Observer {
+                listAdapter.setData(it)
+            })
+            R.id.menu_priority_low -> viewModel.sortByLowPriority.observe(this, Observer {
+                listAdapter.setData(it)
+            })
         }
         return super.onOptionsItemSelected(item)
     }

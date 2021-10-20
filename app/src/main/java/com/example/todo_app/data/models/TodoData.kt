@@ -14,7 +14,7 @@ data class TodoData(
     var id : Int,
     @ColumnInfo(name = "todo_title")
     var title : String,
-    @ColumnInfo(name = "todo+priority")
+    @ColumnInfo(name = "todo_priority")
     var priority: Priority,
     @ColumnInfo(name = "todo_description")
     var description : String
