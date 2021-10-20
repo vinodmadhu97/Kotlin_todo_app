@@ -47,5 +47,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application){
         }
     }
 
+    fun searchedData(searchedKey:String):LiveData<List<TodoData>> = repository.searchedData(searchedKey)
+
 }
 
