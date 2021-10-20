@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_app.R
 import com.example.todo_app.data.models.Priority
@@ -68,8 +69,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         return dataList.size
     }
 
-    fun setData(todoData: List<TodoData>){
-        this.dataList = todoData
-        notifyDataSetChanged()
+    fun setData(todoDataList: List<TodoData>){
+
+
+        //notifyDataSetChanged()
+        // notify data set changed funtion re-render all of the item when data changing. that will reduce performance
+        //of the app avoid to the we can use diff util
+        val todoDataDiffUtil = TodoDiffUtil(dataList,todoDataList)
+        val todoDiffUtilResult = DiffUtil.calculateDiff(todoDataDiffUtil)
+        this.dataList = todoDataList
+        todoDiffUtilResult.dispatchUpdatesTo(this)
     }
 }

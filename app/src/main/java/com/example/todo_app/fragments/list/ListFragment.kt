@@ -17,7 +17,7 @@ import com.example.todo_app.data.viewModel.TodoViewModel
 import com.example.todo_app.databinding.FragmentListBinding
 import com.example.todo_app.fragments.list.adapter.ListAdapter
 import com.google.android.material.snackbar.Snackbar
-import java.text.FieldPosition
+
 
 
 class ListFragment : Fragment() {
