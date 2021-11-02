@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.todo_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

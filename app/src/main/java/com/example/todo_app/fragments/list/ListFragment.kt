@@ -123,6 +123,7 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
     }
 
     private fun confirmDeleteAllItems() {
+
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setPositiveButton("Yes"){_,_ ->
             viewModel.deleteAll()
